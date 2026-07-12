@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS aclaraciones (
+ id_aclaracion INT AUTO_INCREMENT PRIMARY KEY,
+ folio VARCHAR(50) NOT NULL UNIQUE,
+ id_alumno INT NOT NULL,
+ id_adeudo INT NULL,
+ id_pago INT NULL,
+ tipo VARCHAR(60) NOT NULL,
+ asunto VARCHAR(150) NOT NULL,
+ descripcion TEXT NOT NULL,
+ estado ENUM('Abierta','En revisión','Resuelta','Rechazada') NOT NULL DEFAULT 'Abierta',
+ respuesta TEXT NULL,
+ registrada_por INT NULL,
+ atendida_por INT NULL,
+ fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ fecha_atencion DATETIME NULL,
+ CONSTRAINT fk_aclaracion_alumno FOREIGN KEY(id_alumno) REFERENCES alumnos(id_alumno),
+ CONSTRAINT fk_aclaracion_adeudo FOREIGN KEY(id_adeudo) REFERENCES adeudos(id_adeudo) ON DELETE SET NULL,
+ CONSTRAINT fk_aclaracion_pago FOREIGN KEY(id_pago) REFERENCES pagos(id_pago) ON DELETE SET NULL,
+ CONSTRAINT fk_aclaracion_registrada FOREIGN KEY(registrada_por) REFERENCES usuarios(id_usuario) ON DELETE SET NULL,
+ CONSTRAINT fk_aclaracion_atendida FOREIGN KEY(atendida_por) REFERENCES usuarios(id_usuario) ON DELETE SET NULL
+);

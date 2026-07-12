@@ -1,0 +1,316 @@
+#student-dashboard,
+#student-dashboard *,
+#student-dashboard *::before,
+#student-dashboard *::after {
+    box-sizing: border-box;
+}
+
+.student-dashboard-page {
+    min-width: 0;
+    background: #f3f3f3;
+}
+
+#student-dashboard.student-dashboard-main {
+    width: 100%;
+    min-height: calc(100vh - 64px);
+    padding: 16px 20px 24px;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+#student-dashboard .student-dashboard-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto 16px;
+    text-align: center;
+}
+
+#student-dashboard .student-dashboard-logo {
+    display: block;
+    width: 150px;
+    max-width: 40%;
+    height: auto;
+    max-height: 72px;
+    object-fit: contain;
+    margin: 0 auto 7px;
+}
+
+#student-dashboard .student-dashboard-title {
+    margin: 0;
+    color: #f58220;
+    font-size: 29px;
+    line-height: 1.15;
+}
+
+#student-dashboard .student-dashboard-subtitle {
+    margin: 4px 0 0;
+    color: #555555;
+    font-size: 16px;
+}
+
+#student-dashboard .student-dashboard-divider {
+    width: 70px;
+    height: 4px;
+    margin-top: 10px;
+    border-radius: 999px;
+    background: #f58220;
+}
+
+#student-dashboard .student-dashboard-grid {
+    width: min(100%, 1200px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 16px;
+}
+
+#student-dashboard .student-dashboard-card {
+    min-width: 0;
+    padding: 20px;
+    background: #ffffff;
+    border-top: 4px solid #f58220;
+    border-radius: 13px;
+    box-shadow: 0 5px 17px rgba(0, 0, 0, 0.10);
+}
+
+#student-dashboard .student-dashboard-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 0 14px;
+    color: #303030;
+    font-size: 20px;
+    line-height: 1.25;
+    text-align: center;
+}
+
+#student-dashboard .student-dashboard-rows {
+    margin: 0;
+}
+
+#student-dashboard .student-dashboard-row {
+    display: grid;
+    grid-template-columns: minmax(120px, 0.9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+#student-dashboard .student-dashboard-row:last-child {
+    border-bottom: 0;
+}
+
+#student-dashboard .student-dashboard-label {
+    color: #555555;
+    font-weight: 700;
+}
+
+#student-dashboard .student-dashboard-value {
+    margin: 0;
+    overflow-wrap: anywhere;
+    color: #222222;
+    text-align: right;
+}
+
+#student-dashboard .student-dashboard-total {
+    margin: 3px -8px;
+    padding: 9px 8px;
+    background: #fff5e8;
+    border-radius: 7px;
+}
+
+#student-dashboard .student-dashboard-total .student-dashboard-label,
+#student-dashboard .student-dashboard-total .student-dashboard-value {
+    color: #df6b0a;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+#student-dashboard .student-dashboard-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+#student-dashboard .student-dashboard-status-paid {
+    background: #e8f6ec;
+    color: #23783a;
+}
+
+#student-dashboard .student-dashboard-status-pending {
+    background: #fff2d6;
+    color: #955500;
+}
+
+#student-dashboard .student-dashboard-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#student-dashboard .student-dashboard-actions h3 {
+    margin: 8px 0 5px;
+    color: #333333;
+    font-size: 19px;
+}
+
+#student-dashboard .student-dashboard-actions p {
+    max-width: 310px;
+    margin: 0;
+    color: #666666;
+}
+
+#student-dashboard .student-dashboard-success,
+#student-dashboard .student-dashboard-pending-icon,
+#student-dashboard .student-dashboard-info-icon {
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+#student-dashboard .student-dashboard-success {
+    background: #e8f6ec;
+    color: #25833d;
+}
+
+#student-dashboard .student-dashboard-pending-icon {
+    background: #fff2d6;
+    color: #b96800;
+}
+
+#student-dashboard .student-dashboard-info-icon {
+    background: #eaf3fb;
+    color: #2878ad;
+}
+
+#student-dashboard .student-dashboard-primary-action {
+    display: block;
+    width: 100%;
+    min-height: 45px;
+    margin-top: 20px;
+    padding: 11px 16px;
+    border-radius: 8px;
+    background: #f58220;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+}
+
+#student-dashboard .student-dashboard-primary-action:hover {
+    background: #d96f16;
+}
+
+#student-dashboard .student-dashboard-primary-action:focus-visible {
+    outline: 3px solid rgba(245, 130, 32, 0.4);
+    outline-offset: 3px;
+}
+
+#student-dashboard .student-dashboard-empty {
+    margin: 30px 0;
+    color: #666666;
+    text-align: center;
+}
+
+@media (max-width: 1000px) {
+    #student-dashboard .student-dashboard-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #student-dashboard .student-dashboard-actions {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 680px) {
+    #student-dashboard.student-dashboard-main {
+        min-height: auto;
+        padding: 18px 15px 30px;
+    }
+
+    #student-dashboard .student-dashboard-logo {
+        width: 130px;
+        max-width: 55%;
+    }
+
+    #student-dashboard .student-dashboard-title {
+        font-size: 26px;
+    }
+
+    #student-dashboard .student-dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #student-dashboard .student-dashboard-actions {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 420px) {
+    #student-dashboard .student-dashboard-card {
+        padding: 18px 15px;
+    }
+
+    #student-dashboard .student-dashboard-row {
+        grid-template-columns: 1fr;
+        gap: 3px;
+    }
+
+    #student-dashboard .student-dashboard-value {
+        text-align: left;
+    }
+}
+/* Panel administrativo inicial; aislado del dashboard del alumno. */
+.admin-dashboard-page {
+    min-height: 100vh;
+    background: #f3f3f3;
+}
+
+.admin-dashboard-main {
+    min-height: calc(100vh - 64px);
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-dashboard-card {
+    width: min(100%, 680px);
+    padding: 40px;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+    text-align: center;
+}
+
+.admin-dashboard-card h1 {
+    margin: 8px 0 16px;
+}
+
+.admin-dashboard-kicker,
+.admin-dashboard-name {
+    color: #555555;
+    font-weight: 600;
+}
+
+.admin-dashboard-card .student-dashboard-primary-action {
+    display: inline-block;
+    margin-top: 20px;
+}
+.student-dashboard-extension{display:inline-block;padding:4px 9px;border-radius:999px;font-size:13px;font-weight:700}.student-dashboard-extension-active{background:#dff3e8;color:#17663c}.student-dashboard-extension-expired{background:#fff0d2;color:#805100}.student-dashboard-extension-message{margin:10px 0;padding:10px 12px;border-radius:8px;background:#edf7f1;color:#245d3e;font-size:14px;line-height:1.4}.student-dashboard-extension-message-expired{background:#fff4df;color:#704300}.student-dashboard-surcharge-notice{margin:10px 0;padding:10px 12px;border-radius:8px;background:#fff4df;color:#704300;font-size:14px;line-height:1.4}

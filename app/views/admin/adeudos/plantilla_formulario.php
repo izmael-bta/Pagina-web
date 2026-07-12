@@ -1,0 +1,5 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title><?=htmlspecialchars($titulo,ENT_QUOTES,'UTF-8')?></title><link rel="stylesheet" href="<?=BASE_URL?>/public/css/estilos.css"><link rel="stylesheet" href="<?=BASE_URL?>/public/css/admin.css"></head>
+<body class="admin-page"><?php require __DIR__.'/../partials/navbar.php';?><div class="admin-layout"><?php require __DIR__.'/../partials/sidebar.php';?><div class="admin-sidebar-overlay" id="admin-sidebar-overlay" hidden></div><main class="admin-main">
+<header class="admin-debt-header"><div><h1><?=htmlspecialchars($titulo,ENT_QUOTES,'UTF-8')?></h1><p>Los importes se validan y calculan nuevamente en el servidor.</p><?php if($modo==='crear'):?><p class="admin-debt-recargo-info">Recargo automático al vencer: <strong>$<?=number_format($recargoProgramado,2)?></strong> · Día límite: <strong><?= (int)$diaLimite ?></strong></p><?php endif;?></div></header>
+<?php require __DIR__.'/partials/formulario.php';require __DIR__.'/../partials/footer.php';?></main></div><script src="<?=BASE_URL?>/public/js/admin.js"></script></body></html>

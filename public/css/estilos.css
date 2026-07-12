@@ -1,0 +1,482 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #f2f2f2;
+    color: #222;
+}
+
+.contenedor {
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.logo {
+    width: 220px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #f58220;
+    margin-bottom: 5px;
+}
+
+.subtitulo {
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.tarjeta {
+    background: white;
+    padding: 30px;
+    max-width: 450px;
+    margin: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    text-align: left;
+}
+
+.tarjeta h2 {
+    text-align: center;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background: #f58220;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #d96f16;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    background: #f58220;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.navbar-contenido {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    min-height: 64px;
+    margin: 0 auto;
+    padding: 8px 5%;
+}
+
+.navbar-marca {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.navbar-marca:focus-visible,
+.accesos-boton:focus-visible,
+.accesos-menu a:focus-visible {
+    outline: 3px solid #222;
+    outline-offset: 2px;
+}
+
+.accesos {
+    position: relative;
+}
+
+.accesos-boton {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    width: auto;
+    margin: 0;
+    padding: 10px 14px;
+    background: white;
+    color: #333;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    font-size: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.14);
+}
+
+.accesos-boton:hover,
+.accesos-boton[aria-expanded="true"] {
+    background: #fff4eb;
+    color: #9f4c0b;
+}
+
+.accesos-flecha {
+    transition: transform 0.2s ease;
+}
+
+.accesos-boton[aria-expanded="true"] .accesos-flecha {
+    transform: rotate(180deg);
+}
+
+.accesos-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 230px;
+    overflow: hidden;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+}
+
+.accesos-menu[hidden] {
+    display: none;
+}
+
+.accesos-menu a {
+    display: block;
+    padding: 12px 15px;
+    color: #333;
+    text-decoration: none;
+}
+
+.accesos-menu a:hover,
+.accesos-menu a:focus-visible {
+    background: #fff4eb;
+}
+
+.accesos-menu a.activo {
+    background: #f58220;
+    color: white;
+    font-weight: bold;
+}
+
+.navbar-alumno-acciones {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+    color: white;
+}
+
+.navbar-alumno-identidad {
+    font-weight: bold;
+}
+
+.boton-cerrar-sesion {
+    padding: 9px 14px;
+    background: white;
+    color: #9f4c0b;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.14);
+}
+
+.boton-cerrar-sesion:hover,
+.boton-cerrar-sesion:focus-visible {
+    background: #fff4eb;
+    color: #743604;
+    outline: 3px solid #222;
+    outline-offset: 2px;
+}
+
+.boton-enlace {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background: #f58220;
+    color: white;
+    border-radius: 8px;
+    font-size: 17px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.boton-enlace:hover {
+    background: #d96f16;
+}
+
+.mensaje {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}
+
+.info {
+    background: #fafafa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border-left: 5px solid #f58220;
+}
+
+.boton-secundario {
+    background: #555;
+}
+
+.boton-secundario:hover {
+    background: #333;
+}
+
+.flash {
+    margin: 15px 0;
+    padding: 12px;
+    border-left: 5px solid;
+    border-radius: 7px;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.flash-exito {
+    background: #e8f6ec;
+    border-color: #25833d;
+    color: #175426;
+}
+
+.flash-error {
+    background: #fdecec;
+    border-color: #c62828;
+    color: #8b1b1b;
+}
+
+.flash-advertencia {
+    background: #fff5dd;
+    border-color: #d98b00;
+    color: #754d00;
+}
+
+.flash-informacion {
+    background: #eaf3fb;
+    border-color: #2878ad;
+    color: #174d70;
+}
+
+.mensaje-informativo {
+    color: #555;
+    font-weight: bold;
+    text-align: center;
+}
+
+.descripcion-acceso {
+    color: #555;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.enlace-regreso {
+    display: block;
+    margin-top: 20px;
+    color: #b85e14;
+    text-align: center;
+}
+
+.enlace-regreso:hover,
+.enlace-regreso:focus-visible {
+    color: #743604;
+}
+
+.tarjeta-password {
+    max-width: 520px;
+}
+
+.campo-password {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+}
+
+.campo-password input {
+    min-width: 0;
+}
+
+.boton-toggle-password {
+    width: auto;
+    min-width: 82px;
+    margin-top: 8px;
+    padding: 10px;
+    background: #555;
+    font-size: 14px;
+}
+
+.boton-toggle-password:hover,
+.boton-toggle-password:focus-visible {
+    background: #333;
+    outline: 3px solid #f58220;
+    outline-offset: 2px;
+}
+
+/* Estilos de la vista de registro del estudiante. */
+.registro-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.registro-estudiante {
+    background-color: white;
+    width: 420px;
+    padding: 30px;
+    margin: 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    text-align: left;
+}
+
+.registro-estudiante h1 {
+    text-align: center;
+    color: #1f4e79;
+}
+
+.registro-estudiante .dato {
+    margin: 12px 0;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border-left: 5px solid #1f4e79;
+}
+
+.registro-estudiante .aprobado,
+.registro-estudiante .reprobado {
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+}
+
+.registro-estudiante .aprobado {
+    color: green;
+}
+
+.registro-estudiante .reprobado {
+    color: red;
+}
+
+@media (max-width: 600px) {
+    .navbar-contenido {
+        min-height: 58px;
+        padding: 8px 15px;
+    }
+
+    .navbar-marca {
+        max-width: 58%;
+        font-size: 15px;
+        line-height: 1.2;
+    }
+
+    .accesos-boton {
+        padding: 9px 11px;
+    }
+
+    .accesos-menu {
+        width: min(230px, calc(100vw - 30px));
+    }
+
+    .navbar-alumno-acciones {
+        width: 100%;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .navbar-privada .navbar-contenido {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .navbar-privada .navbar-marca {
+        width: 100%;
+        max-width: none;
+        text-align: center;
+    }
+
+    .navbar-alumno-identidad {
+        max-width: 105px;
+        overflow: hidden;
+        font-size: 13px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .boton-cerrar-sesion {
+        padding: 8px 9px;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    .contenedor {
+        width: calc(100% - 30px);
+        margin: 28px auto;
+    }
+
+    .tarjeta {
+        padding: 24px 20px;
+    }
+
+    .logo {
+        width: min(220px, 75%);
+    }
+
+    .campo-password {
+        gap: 6px;
+    }
+
+    .boton-toggle-password {
+        min-width: 74px;
+        padding: 9px 7px;
+        font-size: 13px;
+    }
+}
+
+@media print {
+    body {
+        background: white;
+    }
+
+    .navbar,
+    .no-imprimir {
+        display: none !important;
+    }
+
+    .contenedor {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+    }
+
+    .contenedor > .logo {
+        width: 150px;
+    }
+
+    .tarjeta {
+        max-width: none;
+        padding: 20px;
+        border: 1px solid #ddd;
+        box-shadow: none;
+    }
+}

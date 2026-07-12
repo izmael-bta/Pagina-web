@@ -1,0 +1,254 @@
+openapi: 3.0.3
+info:
+  title: API Portal Web de Pagos UTSC
+  version: 1.0.0
+  description: API local basada en la sesión PHP del alumno.
+servers:
+  - url: http://localhost/Portal_Web_Pagos_UTSC
+paths:
+  /api/alumnos/perfil.php:
+    get:
+      summary: Perfil del alumno autenticado
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Perfil encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  exito:
+                    type: boolean
+                    example: true
+                  alumno:
+                    $ref: '#/components/schemas/Alumno'
+        '401':
+          $ref: '#/components/responses/NoAutorizado'
+        '404':
+          $ref: '#/components/responses/NoEncontrado'
+        '405':
+          $ref: '#/components/responses/MetodoIncorrecto'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+  /api/adeudos/actual.php:
+    get:
+      summary: Adeudo más reciente del alumno autenticado
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Adeudo encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  exito:
+                    type: boolean
+                    example: true
+                  adeudo:
+                    $ref: '#/components/schemas/Adeudo'
+        '401':
+          $ref: '#/components/responses/NoAutorizado'
+        '404':
+          $ref: '#/components/responses/NoEncontrado'
+        '405':
+          $ref: '#/components/responses/MetodoIncorrecto'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+  /api/adeudos/historial.php:
+    get:
+      summary: Historial de adeudos del alumno autenticado
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Historial encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  exito:
+                    type: boolean
+                    example: true
+                  adeudos:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Adeudo'
+        '401':
+          $ref: '#/components/responses/NoAutorizado'
+        '404':
+          $ref: '#/components/responses/NoEncontrado'
+        '405':
+          $ref: '#/components/responses/MetodoIncorrecto'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+  /api/pagos/registrar.php:
+    post:
+      summary: Registra el pago del adeudo actual
+      description: El alumno y el total se obtienen de la sesión y de MySQL; no se aceptan desde el cliente.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - metodo_pago
+              additionalProperties: false
+              properties:
+                metodo_pago:
+                  type: string
+                  enum: [Tarjeta]
+      responses:
+        '201':
+          description: Pago registrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  exito:
+                    type: boolean
+                    example: true
+                  pago:
+                    $ref: '#/components/schemas/Pago'
+        '400':
+          $ref: '#/components/responses/SolicitudInvalida'
+        '401':
+          $ref: '#/components/responses/NoAutorizado'
+        '404':
+          $ref: '#/components/responses/NoEncontrado'
+        '405':
+          $ref: '#/components/responses/MetodoIncorrecto'
+        '500':
+          $ref: '#/components/responses/ErrorInterno'
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: PHPSESSID
+  schemas:
+    Alumno:
+      type: object
+      required: [id_alumno, matricula, nombre, correo, carrera, grupo]
+      properties:
+        id_alumno:
+          type: integer
+          example: 1
+        matricula:
+          type: string
+          example: '25906'
+        nombre:
+          type: string
+          example: BAUTISTA PEREZ ISMAEL
+        correo:
+          type: string
+          format: email
+          example: 25906@virtual.utsc.edu.mx
+        carrera:
+          type: string
+          example: Desarrollo de Software Multiplataforma
+        grupo:
+          type: string
+          example: DSM4A VESP
+    Adeudo:
+      type: object
+      required: [id_adeudo, periodo, periodo_texto, mensualidad, aportacion_tsu, atraso, recargo, total, estado]
+      properties:
+        id_adeudo:
+          type: integer
+          example: 1
+        periodo:
+          type: string
+          format: date
+          nullable: true
+          example: '2026-07-01'
+        periodo_texto:
+          type: string
+          example: Julio 2026
+        mensualidad:
+          type: number
+          format: float
+          example: 400
+        aportacion_tsu:
+          type: number
+          format: float
+          example: 50
+        atraso:
+          type: number
+          format: float
+          minimum: 0
+          description: Monto pendiente acumulado de periodos anteriores.
+          example: 0
+        recargo:
+          type: number
+          format: float
+          example: 0
+        total:
+          type: number
+          format: float
+          example: 450
+        estado:
+          type: string
+          example: Pendiente
+    Pago:
+      type: object
+      properties:
+        id_adeudo:
+          type: integer
+        metodo_pago:
+          type: string
+        total_pagado:
+          type: number
+          format: float
+        folio:
+          type: string
+        fecha_pago:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        exito:
+          type: boolean
+          example: false
+        mensaje:
+          type: string
+  responses:
+    SolicitudInvalida:
+      description: Datos inválidos
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NoAutorizado:
+      description: Sesión ausente o inválida
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NoEncontrado:
+      description: Recurso no encontrado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    MetodoIncorrecto:
+      description: Método HTTP no permitido
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ErrorInterno:
+      description: Error interno sin detalles de MySQL
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
