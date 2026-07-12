@@ -14,6 +14,8 @@ require_once __DIR__ . '/app/controllers/AdminPagoController.php';
 require_once __DIR__ . '/app/controllers/AdminProrrogaController.php';
 require_once __DIR__ . '/app/controllers/AdminAclaracionController.php';
 require_once __DIR__ . '/app/controllers/AdminConfiguracionController.php';
+require_once __DIR__ . '/app/controllers/AdminReporteController.php';
+require_once __DIR__ . '/app/controllers/AdminEstadisticaController.php';
 
 $directorioBase = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
 define('BASE_URL', $directorioBase === '/' ? '' : rtrim($directorioBase, '/'));
@@ -111,10 +113,18 @@ switch ($ruta) {
         (new AdminConfiguracionController($conn))->guardar();
         break;
     case 'admin-reportes':
-        (new AdminDashboardController($conn))->modulo('admin-reportes', 'Reportes');
+        (new AdminReporteController($conn))->index();
+        break;
+    case 'admin-reporte-pagos': (new AdminReporteController($conn))->pagos(); break;
+    case 'admin-reporte-adeudos': (new AdminReporteController($conn))->adeudos(); break;
+    case 'admin-reporte-alumnos': (new AdminReporteController($conn))->alumnos(); break;
+    case 'admin-reporte-prorrogas': (new AdminReporteController($conn))->prorrogas(); break;
+    case 'admin-reporte-aclaraciones': (new AdminReporteController($conn))->aclaraciones(); break;
+    case 'admin-reporte-exportar': (new AdminReporteController($conn))->exportar(); break;
+    case 'admin-reporte-imprimir': (new AdminReporteController($conn))->imprimir();
         break;
     case 'admin-estadisticas':
-        (new AdminDashboardController($conn))->modulo('admin-estadisticas', 'Estadísticas');
+        (new AdminEstadisticaController($conn))->index();
         break;
     case 'admin-salir':
         (new AdminAuthController($conn))->cerrarSesion();

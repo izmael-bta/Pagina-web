@@ -157,6 +157,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+function initAdminStatistics(){
+    const charts=[['statistics_income_chart','statistics_income_data'],['statistics_debts_chart','statistics_debts_data'],['statistics_payment_methods_chart','statistics_methods_data'],['statistics_origins_chart','statistics_origins_data'],['statistics_students_chart','statistics_students_data'],['statistics_clarifications_chart','statistics_clarifications_data'],['statistics_extensions_chart','statistics_extensions_data'],['statistics_payments_chart','statistics_payments_data']];
+    const colors=['#f58220','#23834f','#2878b8','#d4a017','#b74242','#70757a'];
+    const draw=(canvas,data)=>{const wrapper=canvas.closest('.admin-statistics-chart-wrapper')||canvas.parentElement;const width=Math.max(260,wrapper.clientWidth);const height=window.innerWidth<=600?190:(window.innerWidth<=900?210:230);canvas.width=width;canvas.height=height;const ctx=canvas.getContext('2d');ctx.clearRect(0,0,width,height);const values=data.map(x=>Number(x.cantidad??x.total??0));const max=Math.max(...values,1);const left=42,right=14,top=22,bottom=42,plotHeight=height-top-bottom;const slot=(width-left-right)/Math.max(values.length,1);const bar=Math.max(12,Math.min(42,slot*.55));ctx.font=window.innerWidth<=600?'10px Arial':'11px Arial';data.forEach((item,i)=>{const value=values[i];const h=(value/max)*plotHeight;const x=left+i*slot+(slot-bar)/2;const y=top+plotHeight-h;ctx.fillStyle=colors[i%colors.length];ctx.fillRect(x,y,bar,h);ctx.fillStyle='#333';ctx.textAlign='center';ctx.fillText(String(value.toFixed(2).replace('.00','')),x+bar/2,Math.max(13,y-6));const label=String(item.etiqueta??item.periodo??'').slice(0,10);ctx.fillText(label,x+bar/2,height-17);});ctx.strokeStyle='#9aa0a6';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(left,top);ctx.lineTo(left,top+plotHeight);ctx.lineTo(width-right,top+plotHeight);ctx.stroke();};
+    charts.forEach(([canvasId])=>{const canvas=document.getElementById(canvasId);if(!canvas||canvas.parentElement.classList.contains('admin-statistics-chart-wrapper'))return;const wrapper=document.createElement('div');wrapper.className='admin-statistics-chart-wrapper';canvas.parentNode.insertBefore(wrapper,canvas);wrapper.appendChild(canvas);});const render=()=>charts.forEach(([canvasId,dataId])=>{const canvas=document.getElementById(canvasId),node=document.getElementById(dataId);if(!canvas||!node)return;try{const data=JSON.parse(node.textContent||'[]');if(data.length)draw(canvas,data);}catch{}});render();let timer;window.addEventListener('resize',()=>{clearTimeout(timer);timer=setTimeout(render,150);});
+}
+document.addEventListener('DOMContentLoaded',initAdminStatistics);
+
 function initClarificationStudentSearch(){
     const buscadorAclaracion=document.getElementById('clarification_student_search');
     const idAlumnoAclaracion=document.getElementById('clarification_student_id');
